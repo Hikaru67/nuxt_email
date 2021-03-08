@@ -5,15 +5,15 @@ import NuxtError from './components/nuxt-error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
-import '..\\assets\\scss\\style.scss'
+import '../assets/scss/style.scss'
 
-import _0499e98b from '..\\layouts\\containers\\_nav.js'
-import _2c58e957 from '..\\layouts\\containers\\TheContainer.vue'
-import _332a3885 from '..\\layouts\\containers\\TheFooter.vue'
-import _36006577 from '..\\layouts\\containers\\TheHeader.vue'
-import _e8988782 from '..\\layouts\\containers\\TheHeaderDropdownAccnt.vue'
-import _5222349c from '..\\layouts\\containers\\TheSidebar.vue'
-import _6f6c098b from '..\\layouts\\default.vue'
+import _0499e98b from '../layouts/containers/_nav.js'
+import _2c58e957 from '../layouts/containers/TheContainer.vue'
+import _332a3885 from '../layouts/containers/TheFooter.vue'
+import _36006577 from '../layouts/containers/TheHeader.vue'
+import _e8988782 from '../layouts/containers/TheHeaderDropdownAccnt.vue'
+import _5222349c from '../layouts/containers/TheSidebar.vue'
+import _6f6c098b from '../layouts/default.vue'
 
 const layouts = { "_containers/_nav": sanitizeComponent(_0499e98b),"_containers/TheContainer": sanitizeComponent(_2c58e957),"_containers/TheFooter": sanitizeComponent(_332a3885),"_containers/TheHeader": sanitizeComponent(_36006577),"_containers/TheHeaderDropdownAccnt": sanitizeComponent(_e8988782),"_containers/TheSidebar": sanitizeComponent(_5222349c),"_default": sanitizeComponent(_6f6c098b) }
 

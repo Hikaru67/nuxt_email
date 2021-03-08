@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div>
     <CCardBody>
       <CDataTable
@@ -141,15 +141,15 @@ export default {
         value["status"] = value.status;
         value["content"] = this.getContentMailThank(value.category_mail);
         this.showLoading = true;
-        // axios
-        //   .post("http://127.0.0.1:8000/api/send-mail", value)
-        //   .then(() => {
-        //     this.showLoading = false;
-        //     this.warningModal1 = true;
-        //   })
-        //   .then(() => {
-        //     this.$emit("reload");
-        //   });
+        axios
+          .post("http://127.0.0.1:8000/api/send-mail", value)
+          .then(() => {
+            this.showLoading = false;
+            this.warningModal1 = true;
+          })
+          .then(() => {
+            this.$emit("reload");
+          });
       }
     },
 

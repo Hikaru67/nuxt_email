@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div>
     <CCardBody>
       <CDataTable
@@ -237,12 +237,12 @@ export default {
     },
 
     getPosition(id) {
-      const position = LIST_POSITION.find((element) => element.value == id);
+      const position = LIST_POSITION.find((element) => element.value === id);
       return position ? position.label : "";
     },
 
     getStatus(id) {
-      const status = LIST_STATUS.find((element) => element.value == id);
+      const status = LIST_STATUS.find((element) => element.value === id);
       return status ? status.label : "";
     },
 
@@ -252,11 +252,11 @@ export default {
     },
 
     selectMail(item) {
-      var index = this.dataSend.findIndex((element) => element.id == item.id);
-      if (index == -1) {
+      var index = this.dataSend.findIndex((element) => element.id === item.id);
+      if (index === -1) {
         this.dataSend.push(item);
       } else {
-        item.category_mail == 0
+        item.category_mail === 0
           ? this.dataSend.splice(index, 1)
           : (this.dataSend[index] = item);
       }
