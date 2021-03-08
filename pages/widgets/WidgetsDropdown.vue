@@ -2,7 +2,7 @@
   <div>
     <CRow>
       <CCol sm="6" lg="3">
-        <CWidgetDropdown color="primary" :header="dataCandidate.length" text="Ứng viên tham gia">
+        <CWidgetDropdown color="primary" :header="dataCandidate.length.toString()" text="Ứng viên tham gia">
           <template #default>
             <CDropdown
                 color="transparent p-0"
@@ -31,7 +31,7 @@
         </CWidgetDropdown>
       </CCol>
           <CCol sm="6" lg="3">
-            <CWidgetDropdown color="info" :header="dataCandidateThank.length" text="Ứng viên đã phỏng vấn">
+            <CWidgetDropdown color="info" :header="dataCandidateThank.length.toString()" text="Ứng viên đã phỏng vấn">
               <template #default>
                 <CDropdown
                     color="transparent p-0"
@@ -64,7 +64,7 @@
           <CCol sm="6" lg="3">
             <CWidgetDropdown
                 color="warning"
-                :header="dataHistory.length"
+                :header="dataHistory.length.toString()"
                 text="Lịch sử gửi mail"
             >
               <template #default>
