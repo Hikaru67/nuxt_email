@@ -2,11 +2,11 @@
   <div>
     <CCardBody>
       <CDataTable
-        :items="dataHistory"
-        :fields="fields"
-        items-per-page-select
-        :items-per-page="5"
-        pagination
+          :items="dataHistory"
+          :fields="fields"
+          items-per-page-select
+          :items-per-page="5"
+          pagination
       >
         <template #candidate_id="{item}">
           <td>
@@ -35,16 +35,16 @@
         </template>
         <template #created_at="{item}">
           <td>
-            {{ convertDate(item.created_at) }}
+            {{ calLastTime(item.created_at) }}
           </td>
         </template>
         <template #show="{item}">
           <td>
             <CButton
-              color="primary"
-              variant="outline"
-              size="sm"
-              @click="showModal(item)"
+                color="primary"
+                variant="outline"
+                size="sm"
+                @click="showModal(item)"
             >
               Preview
             </CButton>
@@ -53,10 +53,10 @@
       </CDataTable>
     </CCardBody>
     <CModal
-      CModal
-      title="Mail Content"
-      color="success"
-      :show.sync="warningModal"
+        CModal
+        title="Mail Content"
+        color="success"
+        :show.sync="warningModal"
     >
       <div class="content-mail">
         {{ content }}
@@ -82,7 +82,7 @@ const fields = [
     key: "status",
     label: "Status",
   },
-  { key: "created_at", label: "Created At" },
+  { key: "created_at", label: "Activity" },
   {
     key: "show",
     label: "",
@@ -129,6 +129,59 @@ export default {
       created = moment(String(created)).format("DD/MM/YYYY");
       return created;
     },
+
+    convertTime(unixTime) {
+
+    },
+
+    calLastTime(time) {
+      let lastTime = new Date(time).getTime();
+      let currentTime = new Date(Date.now()).getTime();
+      let diffTime = currentTime - lastTime;
+      console.log(diffTime);
+      console.log(parseInt(diffTime/(60*1000)));
+      console.log("last: " + new Date(lastTime));
+      console.log("curr: " + new Date(currentTime))
+
+
+      if(parseInt(diffTime/(365*24*3600*1000)) > 1) {
+        return (parseInt(diffTime/(365*24*3600*1000))) + " years ago";
+      }
+      else if (parseInt(diffTime/(365*24*3600*1000)) > 0) {
+        return "Last year";
+      }
+      else if(parseInt(diffTime/(30*24*3600*1000)) > 1) {
+        return (parseInt(diffTime/(30*24*3600*1000))) + " months ago";
+      }
+      else if(parseInt(diffTime/(30*24*3600*1000)) > 0) {
+        return "Last month";
+      }
+      else if(parseInt(diffTime/(24*3600*1000)) > 1) {
+        return (parseInt(diffTime/(24*3600*1000))) + " days ago";
+      }
+      else if(parseInt(diffTime/(24*3600*1000)) > 0) {
+        return "Last a day"
+      }
+      else if(parseInt(diffTime/(3600*1000)) > 1) {
+        return (parseInt(diffTime.getUTCDate())) + " hours ago";
+      }
+      else if(parseInt(diffTime/(3600*1000)) > 0) {
+        return "Last an hour"
+      }
+      else if(parseInt(diffTime/(60*1000)) > 1) {
+        return (parseInt(diffTime/(60*1000))) + " minutes ago";
+      }
+      else if(parseInt(diffTime/(60*1000)) > 0) {
+        return "Last a minute"
+      }
+      else if(parseInt(diffTime/(1000)) > 1) {
+        return (parseInt(diffTime/(1000))) + " sec ago";
+      }
+      else if(parseInt(diffTime/(1000)) > 0) {
+        return "Last a second"
+      }
+    }
   },
+
 };
 </script>

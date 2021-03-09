@@ -89,7 +89,7 @@
                     :data-points="listCountHistory"
                     :options="{ elements: { line: { borderWidth: 2.5 }}}"
                     point-hover-background-color="warning"
-                    label="Members"
+                    label="Mails"
                     labels="months"
                 />
               </template>
@@ -98,8 +98,8 @@
           <CCol sm="6" lg="3">
             <CWidgetDropdown
                 color="danger"
-                header="9.823"
-                text="Members online"
+                :header="dataUsers.length.toString()"
+                text="Thành viên"
             >
               <template #default>
                 <CDropdown
@@ -120,6 +120,7 @@
                     class="mt-3 mx-3"
                     style="height:70px"
                     background-color="rgb(250, 152, 152)"
+                    :data-points="listCountUsers"
                     label="Members"
                     labels="months"
                 />
@@ -127,7 +128,7 @@
             </CWidgetDropdown>
           </CCol>
     </CRow>
-    <CRow>
+<!--    <CRow>
       <CCol col="12" sm="6">
         <CCallout color="info">
           <small class="text-muted">Số ứng viên</small><br />
@@ -168,30 +169,36 @@
           >
         </CCallout>
       </CCol>
-    </CRow>
+    </CRow>-->
+      <last-history :dataHistory="dataLastHistory"></last-history>
   </div>
 </template>
 
 <script>
 import {CChartLineSimple, CChartBarSimple} from '../charts/index'
+import lastHistory from "@/components/history/LastHistory";
 import { mapMutations } from 'vuex';
 
 import axios from "axios";
 export default {
   // name: "AdvancedTables",
   name: "WidgetsDropdown",
-  components: { CChartLineSimple, CChartBarSimple },
+  components: { CChartLineSimple, CChartBarSimple, lastHistory },
   data() {
     return {
       dataCandidate: [],
       dataHistory: [],
       dataCandidateThank: [],
+      dataUsers: [],
+      dataLastHistory: [],
 
       listCountCandidate: [],
       listCountHistory: [],
       listCountCandidateThank: [],
+      listCountUsers: [],
     };
   },
+
   mounted() {
     this.listData();
     console.log('asd');
@@ -203,17 +210,39 @@ export default {
       axios.get(url).then((response) => {
         this.dataCandidate = response.data;
         this.listCountCandidate = this.getListCountByMonth(this.dataCandidate);
+      }).then(() => {
+        axios.get("http://127.0.0.1:8000/api/history", { params: this.condition }).then((response) => {
+          this.dataHistory = response.data;
+          this.listCountHistory = this.getListCountByMonth(this.dataHistory)
+          this.dataLastHistory = this.dataHistory.sort( function (a, b) {
+            return b.created_at - a.created_at;
+          });
+          this.dataLastHistory.length = 5;
+          this.dataHistory.map((item) => {
+            this.dataCandidate.map((itemCandidate) => {
+              if (item.candidate_id === itemCandidate.id) {
+                item.name = itemCandidate.name;
+              }
+            });
+          });
+        });
       });
-      axios.get("http://127.0.0.1:8000/api/history").then((response) => {
+      /*axios.get("http://127.0.0.1:8000/api/history").then((response) => {
         this.dataHistory = response.data;
-        this.listCountHistory = this.getListCountByMonth(this.dataHistory);
-      });
+        // this.listCountHistory = this.getListCountByMonth(this.dataHistory);
+      });*/
       axios
         .get("http://127.0.0.1:8000/api/candidate?status=0")
         .then((response) => {
           this.dataCandidateThank = response.data;
           this.listCountCandidateThank = this.getListCountByMonth(this.dataCandidateThank);
         });
+      axios
+          .get("http://127.0.0.1:8000/api/users")
+          .then((response) => {
+            this.dataUsers = response.data;
+            this.listCountUsers = this.getListCountByMonth(this.dataUsers);
+          });
 
     },
 
