@@ -209,13 +209,14 @@ export default {
         this.dataCandidate = response.data;
         this.listCountCandidate = this.getListCountByMonth(this.dataCandidate);
       }).then(() => {
-        axios.get("http://127.0.0.1:8000/api/history", { params: this.condition }).then((response) => {
+        axios.get("http://127.0.0.1:8000/api/history").then((response) => {
           this.dataHistory = response.data;
+
           this.listCountHistory = this.getListCountByMonth(this.dataHistory)
           this.dataLastHistory = this.dataHistory.sort( function (a, b) {
             return b.created_at - a.created_at;
-          });
-          this.dataLastHistory.length = 5;
+          }).slice(0, 5);
+
           this.dataHistory.map((item) => {
             this.dataCandidate.map((itemCandidate) => {
               if (item.candidate_id === itemCandidate.id) {

@@ -166,7 +166,7 @@ export default {
         return "Last a minute"
       }
       else if(parseInt(diffTime/(1000)) > 1) {
-        return (parseInt(diffTime/(1000))) + " sec ago";
+        return (parseInt(diffTime/(1000))) + " seconds ago";
       }
       else if(parseInt(diffTime/(1000)) > 0) {
         return "Last a second"
