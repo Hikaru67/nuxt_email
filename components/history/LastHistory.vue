@@ -130,19 +130,10 @@ export default {
       return created;
     },
 
-    convertTime(unixTime) {
-
-    },
-
     calLastTime(time) {
       let lastTime = new Date(time).getTime();
       let currentTime = new Date(Date.now()).getTime();
       let diffTime = currentTime - lastTime;
-      console.log(diffTime);
-      console.log(parseInt(diffTime/(60*1000)));
-      console.log("last: " + new Date(lastTime));
-      console.log("curr: " + new Date(currentTime))
-
 
       if(parseInt(diffTime/(365*24*3600*1000)) > 1) {
         return (parseInt(diffTime/(365*24*3600*1000))) + " years ago";

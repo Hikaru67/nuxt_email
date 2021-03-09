@@ -201,8 +201,6 @@ export default {
 
   mounted() {
     this.listData();
-    console.log('asd');
-    console.log(this.listCountCandidateThank)
   },
   methods: {
     listData: function() {
@@ -227,10 +225,6 @@ export default {
           });
         });
       });
-      /*axios.get("http://127.0.0.1:8000/api/history").then((response) => {
-        this.dataHistory = response.data;
-        // this.listCountHistory = this.getListCountByMonth(this.dataHistory);
-      });*/
       axios
         .get("http://127.0.0.1:8000/api/candidate?status=0")
         .then((response) => {
@@ -251,7 +245,6 @@ export default {
       let count = 0;
       for(let i=0; i<listData.length; i++){
         let time = new Date(listData[i].created_at).getTime()/1000;
-        // console.log(time + " vs " + this.$store.state.unixTime.UNIX_MONTHS[0].first);
         if (time >= this.$store.state.unixTime.UNIX_MONTHS[month].first &&
             time <= this.$store.state.unixTime.UNIX_MONTHS[month].last)
           count++;
@@ -265,7 +258,6 @@ export default {
         dataCount[i] = this.countDataByMonth(i, listData);
         this.countDataByMonth(i, listData)
       }
-      console.log(dataCount);
       return dataCount;
     }
   },
