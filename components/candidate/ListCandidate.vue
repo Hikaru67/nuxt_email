@@ -70,10 +70,10 @@
 <script>
 import axios from "axios";
 import { cilPencil, cilTrash, cilSearch } from "@coreui/icons";
-import { LIST_POSITION } from "@/const/constdata";
-import { LIST_STATUS } from "@/const/constdata";
-import { LIST_ORIGINS2 } from '@/const/constdata';
-import { LIST_ORIGINS } from '@/const/constdata';
+import { LIST_POSITION, LIST_STATUS, LIST_ORIGINS } from "@/const/constdata";
+
+// import {  } from '@/const/constdata';
+
 import DeleteCandidate from "./DeleteCandidate.vue";
 import moment from "moment";
 const fields = [
@@ -104,7 +104,6 @@ export default {
       LIST_POSITION,
       LIST_STATUS,
       LIST_ORIGINS,
-      LIST_ORIGINS2,
       fields: fields,
       pos: "",
       warningModal: false,
@@ -124,11 +123,6 @@ export default {
     getOrigin(origin) {
       return LIST_ORIGINS.find((element) => element.value === origin.toString()).label;
     },
-
-    /*getOrigin(origin) {
-      return LIST_ORIGINS2[origin];
-    },*/
-
 
     convertDate(created) {
       created = moment(String(created)).format("DD/MM/YYYY");

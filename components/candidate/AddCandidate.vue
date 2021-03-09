@@ -76,34 +76,22 @@
           <CCol sm="6">
             <CRow>
               <CCol sm="3">
-                <label for="Status">Status</label>
+                <label for="status">Status</label>
               </CCol>
               <CCol sm="9">
                 <CInputRadioGroup
-                    id="Status"
-                    name="status"
+                    id="status"
+                    name=""
                     :options="LIST_STATUS"
                     horizontal
                     :checked="form.status.toString()"
+                    v-model="form.status"
                     :value.sync="form.status"
                     inline
                 />
               </CCol>
             </CRow>
           </CCol>
-<!--          <template v-for="value in LIST_STATUS">
-            <CRow form class="form-group" :key="label">
-              <CCol sm="3">
-                {{value.label}}
-              </CCol>
-              <CInputRadioGroup
-                  class="col-sm-9"
-                  :options="LIST_STATUS"
-                  inline
-                  :checked="value.key === form.status"
-              />
-            </CRow>
-          </template>-->
         </CRow>
       </CCardBody>
       <CCardFooter>
@@ -131,10 +119,8 @@
   </div>
 </template>
 <script>
-import { LIST_POSITION } from "@/const/constdata";
-import { LIST_STATUS } from "@/const/constdata";
-import { LIST_ORIGINS } from '@/const/constdata';
-import { LIST_ORIGINS2 } from '@/const/constdata';
+import { LIST_POSITION, LIST_STATUS, LIST_ORIGINS } from "@/const/constdata";
+
 import axios from "axios";
 export default {
   data() {
@@ -142,7 +128,6 @@ export default {
       LIST_POSITION,
       LIST_STATUS,
       LIST_ORIGINS,
-      LIST_ORIGINS2,
       form: {
         firstName: "",
         lastName: "",
