@@ -130,6 +130,11 @@ export default {
       return created;
     },
 
+    /*
+    Calculate last time active
+    @param string time
+    @return string last time ago
+     */
     calLastTime(time) {
       let lastTime = new Date(time).getTime();
       let currentTime = new Date(Date.now()).getTime();
@@ -154,7 +159,7 @@ export default {
         return "Last a day"
       }
       else if(parseInt(diffTime/(3600*1000)) > 1) {
-        return (parseInt(diffTime.getUTCDate())) + " hours ago";
+        return (parseInt(diffTime/(3600*1000))) + " hours ago";
       }
       else if(parseInt(diffTime/(3600*1000)) > 0) {
         return "Last an hour"

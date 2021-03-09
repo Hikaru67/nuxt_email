@@ -30,6 +30,5 @@ export const state = () => ({
         },
     ],
     STATUS: ['No', 'Yes'],
-    API_BLOG_URL: 'http://127.0.0.1:8000/api/blogs/',
-    POSITIONS: [' Việt Nam', ' Châu Âu', ' Châu Á', ' Châu Mỹ'],
+    API_URL: 'http://127.0.0.1:8000/api/',
 })

@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div>
     <CDataTable
       :items="dataCandidate"
@@ -34,6 +34,11 @@
           {{ getStatus(item.status) }}
         </td>
       </template>
+      <template #origin="{item}">
+        <td>
+          {{ getOrigin(item.origin) }}
+        </td>
+      </template>
     </CDataTable>
     <CModal
       title="Delete"
@@ -67,15 +72,19 @@ import axios from "axios";
 import { cilPencil, cilTrash, cilSearch } from "@coreui/icons";
 import { LIST_POSITION } from "@/const/constdata";
 import { LIST_STATUS } from "@/const/constdata";
+import { LIST_ORIGINS2 } from '@/const/constdata';
+import { LIST_ORIGINS } from '@/const/constdata';
 import DeleteCandidate from "./DeleteCandidate.vue";
 import moment from "moment";
 const fields = [
-  { key: "name", label: "Name" },
+  { key: "firstName", label: "First name" },
+  { key: "lastName", label: "Last name" },
   { key: "phone", label: "Phone" },
   { key: "email", label: "Email" },
   { key: "position", label: "Position" },
+  { key: "origin", label: "Origin" },
   { key: "status", label: "Status" },
-  { key: "created_at", label: "Date recived" },
+  { key: "created_at", label: "Date received" },
   {
     key: "delete",
     lable: '',
@@ -94,6 +103,8 @@ export default {
     return {
       LIST_POSITION,
       LIST_STATUS,
+      LIST_ORIGINS,
+      LIST_ORIGINS2,
       fields: fields,
       pos: "",
       warningModal: false,
@@ -107,8 +118,17 @@ export default {
     },
 
     getStatus(status) {
-      return LIST_STATUS.find((element) => element.value === status).label;
+      return LIST_STATUS.find((element) => element.value === status.toString()).label;
     },
+
+    getOrigin(origin) {
+      return LIST_ORIGINS.find((element) => element.value === origin.toString()).label;
+    },
+
+    /*getOrigin(origin) {
+      return LIST_ORIGINS2[origin];
+    },*/
+
 
     convertDate(created) {
       created = moment(String(created)).format("DD/MM/YYYY");

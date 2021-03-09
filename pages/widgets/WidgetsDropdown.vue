@@ -196,7 +196,25 @@ export default {
       listCountHistory: [],
       listCountCandidateThank: [],
       listCountUsers: [],
+
     };
+  },
+
+  computed: {
+    unixTime() {
+      let unixTime = [];
+      let currentTime = new Date( Date.now() );
+
+      for (let $i=0; $i<=currentTime.getUTCMonth(); $i++){
+        unixTime[$i] = {
+          'first': new Date('1/'+($i+1)+'/'+currentTime.getUTCFullYear()).getTime()/1000,
+          'last': new Date('1/'+($i+2)+'/'+currentTime.getUTCFullYear()).getTime()/1000,
+          'test': '1/'+($i+1)+'/'+currentTime.getUTCFullYear(),
+          'test2': '1/'+($i+2)+'/'+currentTime.getUTCFullYear()
+        }
+      }
+      return unixTime;
+    }
   },
 
   mounted() {
@@ -241,21 +259,29 @@ export default {
 
     },
 
-    // Filter by Month
+
+
+    // Count by Month
     countDataByMonth(month, listData) {
       let count = 0;
+      // console.log(this.unixTime);
       for(let i=0; i<listData.length; i++){
         let time = new Date(listData[i].created_at).getTime()/1000;
         if (time >= this.$store.state.unixTime.UNIX_MONTHS[month].first &&
             time <= this.$store.state.unixTime.UNIX_MONTHS[month].last)
           count++;
+        // console.log(this.unixTime)
+        // console.log(time)
+        /*if (time >= this.unixTime[month].first &&
+            time < this.unixTime[month].last)
+          count++;*/
       }
       return count;
     },
 
     getListCountByMonth(listData) {
       let dataCount = [];
-      for ( let i=0; i<7; i++ ){
+      for ( let i=0; i<= 6; i++ ){
         dataCount[i] = this.countDataByMonth(i, listData);
         this.countDataByMonth(i, listData)
       }

@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div>
     <CCard>
       <CCardHeader class ="center">
@@ -6,26 +6,28 @@
       </CCardHeader>
       <CCardBody>
         <CRow>
-          <CCol sm="12">
+          <CCol sm="10">
             <CInput
               label="Name"
               placeholder="Enter your name"
               v-model="form.name"
+              horizontal
             />
           </CCol>
         </CRow>
         <CRow>
-          <CCol sm="12">
-            <CTextarea label="Content" rows="20" v-model="form.content">
+          <CCol sm="10">
+            <CTextarea label="Content" rows="20" v-model="form.content" horizontal>
             </CTextarea>
           </CCol>
         </CRow>
         <CRow>
-          <CCol sm="4">
+          <CCol sm="10">
             <CSelect
               label="Category mail"
               :options="LIST_CATEGORY"
               :value.sync="form.category"
+              horizontal
             />
           </CCol>
         </CRow>
