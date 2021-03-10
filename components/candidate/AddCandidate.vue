@@ -81,12 +81,10 @@
               <CCol sm="9">
                 <CInputRadioGroup
                     id="status"
-                    name=""
+                    name="form.status"
                     :options="LIST_STATUS"
                     horizontal
-                    :checked="form.status.toString()"
-                    v-model="form.status"
-                    :value.sync="form.status"
+                    :checked.sync="form.status"
                     inline
                 />
               </CCol>
@@ -175,6 +173,7 @@ export default {
         .get("http://127.0.0.1:8000/api/candidate/" + this.$route.params.id)
         .then((response) => {
           this.form = response.data;
+          this.form.status = `${this.form.status}`
         });
     },
 

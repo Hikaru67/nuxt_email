@@ -117,7 +117,7 @@ export default {
     },
 
     getStatus(status) {
-      return LIST_STATUS.find((element) => element.value === status.toString()).label;
+      return LIST_STATUS.find((element) => element.value.toString() === status.toString()).label;
     },
 
     getOrigin(origin) {
